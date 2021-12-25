@@ -118,9 +118,7 @@ select * from #person;
 */										
 --=========================================================================================================================================================================
 select t2.BusinessEntityID,
-       t2.LastName,
-	   t2.FirstName,
-	   t2.MiddleName
+       concat_ws(N' ', ltrim(t2.LastName), ltrim(t2.FirstName), ltrim(t2.MiddleName)) as [full_name]
   from [HumanResources].[Employee] as t1
  inner join [Person].[Person]      as t2 on t2.BusinessEntityID = t1.BusinessEntityID
  where t1.JobTitle = N'Design Engineer'
