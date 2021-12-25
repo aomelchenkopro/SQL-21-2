@@ -117,8 +117,14 @@ select * from #person;
 2. Зарегистрировать аккаунт https://github.com/"																		
 */										
 --=========================================================================================================================================================================
-																		
-																		
+select t2.BusinessEntityID,
+       t2.LastName,
+	   t2.FirstName,
+	   t2.MiddleName
+  from [HumanResources].[Employee] as t1
+ inner join [Person].[Person]      as t2 on t2.BusinessEntityID = t1.BusinessEntityID
+ where t1.JobTitle = N'Design Engineer'
+;															
 																		
 																		
 																		
