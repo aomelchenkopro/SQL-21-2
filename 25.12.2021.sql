@@ -124,19 +124,21 @@ select t2.BusinessEntityID,
  where t1.JobTitle = N'Design Engineer'
 ;															
 																		
-																		
-																		
+-- Мирошниченко Анастасия
+select t1.BusinessEntityID,
+       concat_ws(N' ', ltrim(t2.LastName), ltrim(t2.FirstName), ltrim(t2.MiddleName)) as [FULL_NAME]
+  from [HumanResources].[Employee] as t1
+ inner join [Person].[Person]      as t2 on t2.BusinessEntityID = t1.BusinessEntityID
+ where t1.JobTitle = N'Production Supervisor - WC60'
+;
+															
 --Молчанов 25.12.21
 select t1.BusinessEntityID,
        concat_ws (N' ', t2.FirstName,  t2.MiddleName, t2.LastName)
    from [HumanResources].[Employee] as t1
  inner join [Person].[Person] as t2 on t2.BusinessEntityID=t1.BusinessEntityID
    where t1.JobTitle=N'Production Supervisor - WC60';
-
-
-
-
-																														
+																										
 																		
 																		
 																		
