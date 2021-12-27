@@ -1,0 +1,6 @@
+IP ВНУТРЕННИЙ: 10.47.91.174:5432
+IP ВНЕШНИЙ: 159.224.194.250:5432
+LOGIN: postgres
+PASSWORD: Qwerty123
+Среда разработки - pgAdmin 4
+https://www.pgadmin.org/download/pgadmin-4-windows/

@@ -1,0 +1,6 @@
+IP ВНУТРЕННИЙ: 10.47.90.28 
+IP ВНЕШНИЙ: 159.224.194.250 
+LOGIN: sa
+PASSWORD:rLC9s39J7h
+Среда разработки - SSMS
+https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15
