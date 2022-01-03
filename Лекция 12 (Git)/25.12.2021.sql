@@ -144,7 +144,16 @@ select t2.BusinessEntityID,
        concat_ws(N' ', ltrim(t2.LastName), ltrim(t2.FirstName), ltrim(t2.MiddleName)) as [full_name]
   from [HumanResources].[Employee] as t1
  inner join [Person].[Person]      as t2	on t2.BusinessEntityID = t1.BusinessEntityID														
-where t1.JobTitle = N'Production Supervisor - WC60'																
+where t1.JobTitle = N'Production Supervisor - WC60'		
+
+-- Томас Елена 02.01.2022
+
+select t1.BusinessEntityID,
+	concat_ws(N' ', t1.LastName, t1.FirstName, t1.LastName)
+	from [Person].[Person] as t1
+	inner join[HumanResources].[Employee] as t2 on t2.BusinessEntityID = t1.BusinessEntityID
+where t2.JobTitle = N'Production Supervisor - WC60';
+
 														
 																		
 																		
