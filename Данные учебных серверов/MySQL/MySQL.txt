@@ -1,6 +1,0 @@
-IP ВНУТРЕННИЙ: 10.47.90.28
-IP ВНЕШНИЙ: 159.224.194.250
-LOGIN: sa
-PASSWORD: Qwerty123
-Среда разработки - Workbench
-https://dev.mysql.com/downloads/workbench/
