@@ -13,14 +13,13 @@ with orders as
 (
 select t1.SalesOrderID,
        t1.SalesOrderDetailID,
-	   t1.LineTotal,
-	   t1.LineTotal / sum(t1.LineTotal)over(partition by t1.SalesOrderID) * 100 as [DolaOverSum]
+	   t1.LineTotal
   from [Sales].[SalesOrderDetail] as t1 
 )
 select t3.SalesOrderID,
        t3.SalesOrderDetailID,
 	   t3.LineTotal,
-	   t3.[DolaOverSum] 
+	   t3.LineTotal / sum(t3.LineTotal)over(partition by t3.SalesOrderID) * 100 as [DolaOverSum]
   from orders as t3 
  where t3.SalesOrderID in (
 							select t2.SalesOrderID
