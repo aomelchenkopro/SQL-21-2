@@ -1,4 +1,45 @@
-﻿/*
+﻿
+/*
+Задача 1
+Напишите запрос возвращающий детали заказа, у которого наибольшее кол-во деталей (позиций).
+Учитывайте вероятность того, что сразу несколько заказов могут иметь одно и тоже кол-во деталей.
+Рассчитайте долю каждой отдельной детали к общей сумме заказа, в процентном соотношении.
+- Используются таблицы: [Sales].[SalesOrderDetail]
+- Задействуйте оконно агрегатную функцию sum
+- Рез. набор данных содержит: Идент. заказа, идент детали заказа, сумму детали заказа, долю
+- Отсортируйте рез. набор данных по идент. заказа, по доле (по убыванию)
+*/
+with orders as 
+(
+select t1.SalesOrderID,
+       t1.SalesOrderDetailID,
+	   t1.LineTotal,
+	   t1.LineTotal / sum(t1.LineTotal)over(partition by t1.SalesOrderID) * 100 as [DolaOverSum]
+  from [Sales].[SalesOrderDetail] as t1 
+)
+select t3.SalesOrderID,
+       t3.SalesOrderDetailID,
+	   t3.LineTotal,
+	   t3.[DolaOverSum] 
+  from orders as t3 
+ where t3.SalesOrderID in (
+							select t2.SalesOrderID
+							  from orders as t2
+							 group by t2.SalesOrderID
+							having count(distinct t2.SalesOrderDetailID) = (
+																			select top 1
+																				   count(distinct t1.SalesOrderDetailID) as [qty]
+																			  from orders as t1
+																			 group by t1.SalesOrderID
+																			 order by [qty] desc )
+						  )
+order by t3.SalesOrderID, 
+         [DolaOverSum] desc
+;
+
+go
+/*
+Задача 2
 Напишите запрос, который для работников на должностях
 European Sales Manager, North American Sales Manager, Pacific Sales Manager, Sales Representative,
 вернет по 3 последних заказа (за все время). Последний заказа определяется по дате заказа (OrderDate) и
@@ -11,6 +52,7 @@ European Sales Manager, North American Sales Manager, Pacific Sales Manager, Sal
 - Результирующий набор данных содержит: Идент. работника, наименование должности (в верхнем регистре без пробелов в начале),
 идент.заказа, дата проведения заказа, идент. детали заказа, сума заказа, сумма детали заказа,
 номер продукта(в верхнем регистре без пробелов в начале), ранг строки.
+- Отсортируйте рез. набор данных по идент. сотрудника, по дате заказа (по убыванию), по идент заказа (по убыванию)
 */
 
 with orders as 
