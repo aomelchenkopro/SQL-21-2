@@ -11,26 +11,30 @@
 */
 with orders as 
 (
-select t1.SalesOrderID,
-       t1.SalesOrderDetailID,
-	   t1.LineTotal
+-- Список деталей заказов 
+select t1.SalesOrderID,       -- идент. заказа
+       t1.SalesOrderDetailID, -- идент. детали заказа
+	   t1.LineTotal           -- стоимость детали
   from [Sales].[SalesOrderDetail] as t1 
 )
+-- Рез. набор данных. Данные заказов, с наибольшим количеством деталей
 select t3.SalesOrderID,
        t3.SalesOrderDetailID,
 	   t3.LineTotal,
 	   t3.LineTotal / sum(t3.LineTotal)over(partition by t3.SalesOrderID) * 100 as [DolaOverSum]
   from orders as t3 
- where t3.SalesOrderID in (
+ where t3.SalesOrderID in (-- Идент. заказов, у которых наибольшее кол-во деталей
 							select t2.SalesOrderID
 							  from orders as t2
 							 group by t2.SalesOrderID
-							having count(distinct t2.SalesOrderDetailID) = (
+							-- Фаза having фильтрует группы строк, которые образовались на этапе group by. Используется для фильтрации агрегирующих выражений
+							having count(distinct t2.SalesOrderDetailID) = (-- Наибольшее кол-во деталей
 																			select top 1
 																				   count(distinct t1.SalesOrderDetailID) as [qty]
 																			  from orders as t1
 																			 group by t1.SalesOrderID
-																			 order by [qty] desc )
+																			 order by [qty] desc 
+																			 )
 						  )
 order by t3.SalesOrderID, 
          [DolaOverSum] desc
@@ -44,7 +48,9 @@ European Sales Manager, North American Sales Manager, Pacific Sales Manager, Sal
 вернет по 3 последних заказа (за все время). Последний заказа определяется по дате заказа (OrderDate) и
 по индет. заказа (SalesOrderID). Чем больше дата и идентификатор заказа, тем позднее закал был проведен.
 Например, 2014-05-01 00:00:00.000 и 113164 больше чем 2014-05-01 00:00:00.000 и 112471.
+
 Работники на указанных должностях, которые не проводили ни одного заказа остаются самом конце рез. набора данных.
+
 Исключить из выборки сотрудников, которые проводили заказы (за все время) на товары с номерами (ProductNumber) FW-M423, FW-M762, FW-M928, FW-R762, FW-R820 .
 - Используются таблицы: [HumanResources].[Employee], [Sales].[SalesOrderHeader], [Sales].[SalesOrderDetail], [Production].[Product]
 - Задействуйте ранжирующую функцию dense_rank
@@ -66,10 +72,12 @@ select t1.BusinessEntityID,
 	   t4.ProductNumber,
 	   upper(ltrim(t4.[name])) as [name],
 	   dense_rank()over(partition by t1.BusinessEntityID order by t2.OrderDate desc, t2.SalesOrderID desc) as [DRNK]
+
   from [HumanResources].[Employee] as t1 
   left outer join [Sales].[SalesOrderHeader] as t2 on t2.SalesPersonID = t1.BusinessEntityID
   left outer join [Sales].[SalesOrderDetail] as t3 on t3.SalesOrderID = t2.SalesOrderID
   left outer join [Production].[Product] as t4 on t4.ProductID = t3.ProductID
+  -- Список сотрудников 
 where t1.JobTitle in (N'European Sales Manager', N'North American Sales Manager', N'Pacific Sales Manager', N'Sales Representative')
 
 )
