@@ -105,12 +105,12 @@ select t1.CustomerID, -- идент. клиента
 	   count(distinct case t1.OrderDate when '20110602' then t1.SalesOrderID end )     as [20110602],
 	   count(distinct case t1.OrderDate when '20110603' then t1.SalesOrderID end )     as [20110603],
 	   count(distinct case t1.OrderDate when '20110604' then t1.SalesOrderID end )     as [20110604],
-	   count(distinct case t1.OrderDate when '20110605' then t1.SalesOrderID end ) as [20110605],
-	   count(distinct case t1.OrderDate when '20110606' then t1.SalesOrderID end ) as [20110606],
-	   count(distinct case t1.OrderDate when '20110607' then t1.SalesOrderID end ) as [20110607],
-	   count(distinct case t1.OrderDate when '20110608' then t1.SalesOrderID end ) as [20110608],
-	   count(distinct case t1.OrderDate when '20110609' then t1.SalesOrderID end ) as [20110609],
-	   count(distinct case t1.OrderDate when '20110610' then t1.SalesOrderID end ) as [20110610]
+	   count(distinct case t1.OrderDate when '20110605' then t1.SalesOrderID end )     as [20110605],
+	   count(distinct case t1.OrderDate when '20110606' then t1.SalesOrderID end )     as [20110606],
+	   count(distinct case t1.OrderDate when '20110607' then t1.SalesOrderID end )     as [20110607],
+	   count(distinct case t1.OrderDate when '20110608' then t1.SalesOrderID end )     as [20110608],
+	   count(distinct case t1.OrderDate when '20110609' then t1.SalesOrderID end )     as [20110609],
+	   count(distinct case t1.OrderDate when '20110610' then t1.SalesOrderID end )     as [20110610]
   from [Sales].[SalesOrderHeader] as t1
  where t1.OrderDate between '20110601' and '20110630'
  group by t1.CustomerID
@@ -290,3 +290,95 @@ execute sp_executesql @dynamicSQL
 
 
 --==============================================================================================================================================
+-- Елена
+select t1.JobTitle, 
+       count(case t1.HireDate when '20081201' then t1.[BusinessEntityID] end) as [20081201], 
+    count(case t1.HireDate when '20081202' then t1.[BusinessEntityID] end) as [20081202], 
+    count(case t1.HireDate when '20081203' then t1.[BusinessEntityID] end) as [20081203], 
+    count(case t1.HireDate when '20081204' then t1.[BusinessEntityID] end) as [20081204], 
+    count(case t1.HireDate when '20081205' then t1.[BusinessEntityID] end) as [20081205], 
+    count(case t1.HireDate when '20081206' then t1.[BusinessEntityID] end) as [20081206], 
+    count(case t1.HireDate when '20081207' then t1.[BusinessEntityID] end) as [20081207], 
+    count(case t1.HireDate when '20081208' then t1.[BusinessEntityID] end) as [20081208], 
+    count(case t1.HireDate when '20081209' then t1.[BusinessEntityID] end) as [20081209], 
+    count(case t1.HireDate when '20081210' then t1.[BusinessEntityID] end) as [20081210], 
+    count(case t1.HireDate when '20081211' then t1.[BusinessEntityID] end) as [20081211], 
+    count(case t1.HireDate when '20081212' then t1.[BusinessEntityID] end) as [20081212], 
+    count(case t1.HireDate when '20081213' then t1.[BusinessEntityID] end) as [20081213], 
+    count(case t1.HireDate when '20081214' then t1.[BusinessEntityID] end) as [20081214], 
+    count(case t1.HireDate when '20081215' then t1.[BusinessEntityID] end) as [20081215], 
+    count(case t1.HireDate when '20081216' then t1.[BusinessEntityID] end) as [20081216], 
+    count(case t1.HireDate when '20081217' then t1.[BusinessEntityID] end) as [20081217], 
+    count(case t1.HireDate when '20081218' then t1.[BusinessEntityID] end) as [20081218], 
+    count(case t1.HireDate when '20081219' then t1.[BusinessEntityID] end) as [20081219], 
+    count(case t1.HireDate when '20081220' then t1.[BusinessEntityID] end) as [20081220], 
+    count(case t1.HireDate when '20081221' then t1.[BusinessEntityID] end) as [20081221], 
+    count(case t1.HireDate when '20081222' then t1.[BusinessEntityID] end) as [20081222], 
+    count(case t1.HireDate when '20081223' then t1.[BusinessEntityID] end) as [20081223], 
+    count(case t1.HireDate when '20081224' then t1.[BusinessEntityID] end) as [20081224], 
+    count(case t1.HireDate when '20081225' then t1.[BusinessEntityID] end) as [20081225], 
+    count(case t1.HireDate when '20081226' then t1.[BusinessEntityID] end) as [20081226], 
+    count(case t1.HireDate when '20081227' then t1.[BusinessEntityID] end) as [20081227], 
+    count(case t1.HireDate when '20081228' then t1.[BusinessEntityID] end) as [20081228], 
+    count(case t1.HireDate when '20081229' then t1.[BusinessEntityID] end) as [20081229], 
+    count(case t1.HireDate when '20081230' then t1.[BusinessEntityID] end) as [20081230] 
+  from [HumanResources].[Employee] as t1 
+  where t1.HireDate between '20081201' and '20081231' 
+  group by t1.JobTitle 
+  order by t1.JobTitle asc
+;
+--=========================================================================================================================================================
+-- Анастасия
+select t1.JobTitle, 
+    count(distinct case t1.HireDate when '20081201'then t1.BusinessEntityID end)     as [2008-12-01], 
+    count(distinct case t1.HireDate when '20081202'then t1.BusinessEntityID end)     as [2008-12-02], 
+    count(distinct case t1.HireDate when '20081203'then t1.BusinessEntityID end)     as [2008-12-03], 
+    count(distinct case t1.HireDate when '20081204'then t1.BusinessEntityID end)     as [2008-12-04], 
+    count(distinct case t1.HireDate when '20081205'then t1.BusinessEntityID end)     as [2008-12-05], 
+    count(distinct case t1.HireDate when '20081206'then t1.BusinessEntityID end)     as [2008-12-06], 
+    count(distinct case t1.HireDate when '20081207'then t1.BusinessEntityID end)     as [2008-12-07], 
+    count(distinct case t1.HireDate when '20081208'then t1.BusinessEntityID end)     as [2008-12-08], 
+    count(distinct case t1.HireDate when '20081209'then t1.BusinessEntityID end)     as [2008-12-09], 
+    count(distinct case t1.HireDate when '20081210'then t1.BusinessEntityID end)     as [2008-12-10], 
+    count(distinct case t1.HireDate when '20081211'then t1.BusinessEntityID end)     as [2008-12-11], 
+    count(distinct case t1.HireDate when '20081212'then t1.BusinessEntityID end)     as [2008-12-12], 
+    count(distinct case t1.HireDate when '20081213'then t1.BusinessEntityID end)     as [2008-12-13], 
+    count(distinct case t1.HireDate when '20081214'then t1.BusinessEntityID end)     as [2008-12-14], 
+    count(distinct case t1.HireDate when '20081215'then t1.BusinessEntityID end)     as [2008-12-15], 
+    count(distinct case t1.HireDate when '20081216'then t1.BusinessEntityID end)     as [2008-12-16], 
+    count(distinct case t1.HireDate when '20081217'then t1.BusinessEntityID end)     as [2008-12-17], 
+    count(distinct case t1.HireDate when '20081218'then t1.BusinessEntityID end)     as [2008-12-18], 
+    count(distinct case t1.HireDate when '20081219'then t1.BusinessEntityID end)     as [2008-12-19], 
+    count(distinct case t1.HireDate when '20081220'then t1.BusinessEntityID end)     as [2008-12-20], 
+    count(distinct case t1.HireDate when '20081221'then t1.BusinessEntityID end)     as [2008-12-21], 
+    count(distinct case t1.HireDate when '20081222'then t1.BusinessEntityID end)     as [2008-12-22], 
+    count(distinct case t1.HireDate when '20081223'then t1.BusinessEntityID end)     as [2008-12-23], 
+    count(distinct case t1.HireDate when '20081224'then t1.BusinessEntityID end)     as [2008-12-24], 
+    count(distinct case t1.HireDate when '20081225'then t1.BusinessEntityID end)     as [2008-12-25], 
+    count(distinct case t1.HireDate when '20081226'then t1.BusinessEntityID end)     as [2008-12-26], 
+    count(distinct case t1.HireDate when '20081227'then t1.BusinessEntityID end)     as [2008-12-27], 
+    count(distinct case t1.HireDate when '20081228'then t1.BusinessEntityID end)     as [2008-12-28], 
+    count(distinct case t1.HireDate when '20081229'then t1.BusinessEntityID end)     as [2008-12-29], 
+    count(distinct case t1.HireDate when '20081230'then t1.BusinessEntityID end)     as [2008-12-30], 
+    count(distinct case t1.HireDate when '20081231'then t1.BusinessEntityID end)     as [2008-12-31] 
+    from [HumanResources].[Employee] as t1 
+   where t1.HireDate between '20081201' and '20081231' 
+group by t1.JobTitle 
+order by t1.JobTitle asc
+
+--=========================================================================================================================================================
+select t1.JobTitle, -- идент. клиента
+           count(distinct (case  when t1.HireDate between '20091201' and '20091231' then t1.BusinessEntityID end)) as [200912],
+         count(distinct (case when t1.HireDate between  '20091101' and '20091130' then  t1.BusinessEntityID end)) as[200911],
+       count(distinct (case t1.HireDate when '20091001' then t1.BusinessEntityID end)) as[20091001],
+           count(distinct (case t1.HireDate when '20090901' then t1.BusinessEntityID end)) as[20090901],
+           count(distinct (case t1.HireDate when '20090801' then t1.BusinessEntityID end)) as[20090801],
+       count(distinct (case t1.HireDate when '20090701' then t1.BusinessEntityID end)) as[20090701],
+       count(distinct (case t1.HireDate when '20090601' then t1.BusinessEntityID end)) as[20090601],
+       count(distinct (case t1.HireDate when '20090501' then t1.BusinessEntityID end)) as[20090501],
+       count(distinct (case t1.HireDate when '20090401' then t1.BusinessEntityID end)) as[20090401]
+  from [HumanResources].[Employee] as t1
+ where t1.HireDate between '20091201' and '20100101'
+ group by t1.JobTitle
+ order by t1.JobTitle asc
+;
